@@ -11,7 +11,7 @@ Check out regular Baemail here --> [baemail.me](https://baemail.me)
 <!DOCTYPE html>
 <html>
     <head>
-        <title><<<<< YOUR APP >>>>></title>
+        <title>YOUR APP NAME</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <script src="https://www.moneybutton.com/moneybutton.js"></script>
         <script src='https://unpkg.com/bsv@1.0.0/bsv.min.js'></script>

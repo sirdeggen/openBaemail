@@ -26,7 +26,6 @@ Check out regular Baemail here --> [baemail.me](https://baemail.me)
         </section>
         <script>
             const userButton = document.getElementById('user')
-            Baemail.service = {}
             Baemail.user = {}
             // Your app will probably have a user paymail already, if not then you can use this to grab it from MoneyButton.
             const setPaymailButton = () => {

@@ -28,36 +28,6 @@ Check out regular Baemail here --> [baemail.me](https://baemail.me)
             const userButton = document.getElementById('user')
             Baemail.service = {}
             Baemail.user = {}
-
-            const blocks = [
-                {'type': 'paragraph', 'data':
-                        {'text': 'Hello,'}
-                },
-                {'type': 'paragraph', 'data':
-                        {'text': 'This is your receipt example.'}
-                },
-                {'type': 'paragraph', 'data':
-                        {'text': 'Thank you for your purchase of:'}},
-                {'type': 'list', 'data':
-                        { 'style': 'ordered', 'items': ['Something', 'Else', 'A thing'] }
-                },
-                {'type': 'paragraph', 'data':
-                        {'text': 'TOTAL = £300'}},
-                {'type': 'image',
-                    'data':
-                        {
-                            'url': 'https://domain.com/images/logo.png',
-                            'withBorder': false,
-                            'withBackground': false,
-                            'stretched': false
-                        }
-                },
-                {'type': 'paragraph', 'data':
-                        {'text': 'Or something,'}},
-                {'type': 'paragraph', 'data':
-                        {'text': '- Metanet ICU'}
-                }
-            ]
             // Your app will probably have a user paymail already, if not then you can use this to grab it from MoneyButton.
             const setPaymailButton = () => {
                 moneyButton.render(userButton, {
@@ -80,7 +50,7 @@ Check out regular Baemail here --> [baemail.me](https://baemail.me)
                 Baemail.service = {}
                 Baemail.service.paymail = '<<<<< YOUR PAYMAIL >>>>>'
                 if (Baemail.user.paymail) {
-                    await Baemail.fromBlocks(blocks, 0.05)
+                    await Baemail.fromString('This is a receipt, thanks for your purchase.', 0.05)
                     moneyButton.render(userButton, {
                         outputs: [{
                             script: bsv.Script.buildSafeDataOut(['Some Custom', 'App Data']).toASM(), // add your own OP_RETURN data here

@@ -46,7 +46,7 @@ Check out regular Baemail here --> [baemail.me](https://baemail.me)
                 {'type': 'image',
                     'data':
                         {
-                            'url': 'https://metanet.icu/wp-content/uploads/2019/07/cropped-ICU-Logo4.png',
+                            'url': 'https://domain.com/images/logo.png',
                             'withBorder': false,
                             'withBackground': false,
                             'stretched': false

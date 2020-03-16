@@ -176,3 +176,5 @@ Baemail.fromBlocks = async (blocks, amount) => {
     const baemail = {body:{time:Date.now(),blocks: blocks}}
     return Baemail.create(baemail, amount)
 }
+
+export default Baemail

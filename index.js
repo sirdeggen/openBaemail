@@ -23,7 +23,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  **********************************************************************************************************************/
 
-const Baemail = {}
+'use strict'
+
+const Baemail = module.exports
 
 // call baemail's back end for paymail-client
 Baemail.getPki = async (paymail) => {

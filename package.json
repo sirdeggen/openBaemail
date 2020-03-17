@@ -2,7 +2,7 @@
   "name": "open-baemail",
   "version": "0.1.2",
   "description": "Baemail Protocol, send from anywhere. Requires merchant registration for just now.",
-  "main": "dist/main.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\""
   },

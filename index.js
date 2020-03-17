@@ -22,10 +22,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  **********************************************************************************************************************/
-
-'use strict'
-
-const Baemail = module.exports
+const Baemail = {}
 
 // call baemail's back end for paymail-client
 Baemail.getPki = async (paymail) => {

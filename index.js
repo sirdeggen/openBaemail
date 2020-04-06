@@ -22,6 +22,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  **********************************************************************************************************************/
+
 const Baemail = {}
 
 // call baemail's back end for paymail-client
@@ -167,13 +168,13 @@ Baemail.create = async (baemail, amount) => {
 }
 
 Baemail.fromString = async (message, amount) => {
+    const numount = Number(amount)
     const baemail = {body:{time:Date.now(),blocks: [{ type:"paragraph", data:{ text: message }}]}}
-    return Baemail.create(baemail, amount)
+    return Baemail.create(baemail, numount)
 }
 
 Baemail.fromBlocks = async (blocks, amount) => {
+    const numount = Number(amount)
     const baemail = {body:{time:Date.now(),blocks: blocks}}
-    return Baemail.create(baemail, amount)
+    return Baemail.create(baemail, numount)
 }
-
-export default Baemail

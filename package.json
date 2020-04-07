@@ -1,6 +1,6 @@
 {
   "name": "open-baemail",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Baemail Protocol, send from anywhere. Requires merchant registration for just now.",
   "main": "index.js",
   "scripts": {

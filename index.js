@@ -172,6 +172,6 @@ Baemail.fromBlocks = async (blocks, amount) => {
 
 Baemail.fromHtml = async (html, amount) => {
     const numount = Number(amount)
-    const baemail = {body:{time:Date.now(),blocks: html,"version":"3.0.0"}}
+    const baemail = {body:{time:Date.now(),blocks: html, version: '3.0.0'}}
     return Baemail.create(baemail, numount)
 }

@@ -27,7 +27,7 @@ const Baemail = {}
 
 // call baemail's back end for paymail-client
 Baemail.getPki = async (paymail) => {
-    return await fetch('https://baemail.me:2443/pki/', {
+    return (await (await fetch('https://baemail.me:2443/pki/', {
         method: 'POST',
         body: JSON.stringify({
             paymail: paymail
@@ -35,14 +35,12 @@ Baemail.getPki = async (paymail) => {
         headers: {
             'Content-Type': 'application/json'
         }
-    })
-        .then(res => res.json())
-        .then(data => data.pki)
+    })).json()).pki
 }
 
 // call baemail's back end to set merchant key
 Baemail.setMerchantSig = async (service) => {
-    await fetch('https://baemail.me:2443/api/openBaemail/setSig', {
+    const res = await (await fetch('https://baemail.me:2443/api/openBaemail/setSig', {
         method: 'POST',
         body: JSON.stringify({
             ...service
@@ -50,14 +48,13 @@ Baemail.setMerchantSig = async (service) => {
         headers: {
             'Content-Type': 'application/json'
         }
-    })
-        .then(res => res.json())
-        .then(data => console.log(data))
+    })).json()
+    console.log(res)
 }
 
 
 Baemail.getMerchantAuthKey = async () => {
-    await fetch('https://baemail.me:2443/api/openBaemail/getKey', {
+    Baemail.service = await (await fetch('https://baemail.me:2443/api/openBaemail/getKey', {
         method: 'POST',
         body: JSON.stringify({
             paymail: Baemail.service.paymail
@@ -65,13 +62,7 @@ Baemail.getMerchantAuthKey = async () => {
         headers: {
             'Content-Type': 'application/json'
         }
-    })
-        .then(res => res.json())
-        .then(data => {
-                console.log(data)
-                Baemail.service = data
-            }
-        )
+    })).json()
 }
 
 Baemail.wallet = 'moneybutton'
@@ -160,7 +151,7 @@ Baemail.create = async (baemail, amount) => {
     })
     await Baemail.outputs.push({
         to: '1BaemaiLK15EnJyFEhwLbrYJmRjqYoBMTe',
-        amount: amount,
+        amount: '0.01',
         currency: 'USD'
     })
     console.log(OP_RETURN)
@@ -169,12 +160,18 @@ Baemail.create = async (baemail, amount) => {
 
 Baemail.fromString = async (message, amount) => {
     const numount = Number(amount)
-    const baemail = {body:{time:Date.now(),blocks: [{ type:"paragraph", data:{ text: message }}]}}
+    const baemail = {body:{time:Date.now(),blocks: '<div>' + message + '</div>', version: '3.0.0' }}
     return Baemail.create(baemail, numount)
 }
 
 Baemail.fromBlocks = async (blocks, amount) => {
     const numount = Number(amount)
-    const baemail = {body:{time:Date.now(),blocks: blocks}}
+    const baemail = {body:{time:Date.now(),blocks: blocks, version: '2.5.0' }}
+    return Baemail.create(baemail, numount)
+}
+
+Baemail.fromHtml = async (html, amount) => {
+    const numount = Number(amount)
+    const baemail = {body:{time:Date.now(),blocks: html,"version":"3.0.0"}}
     return Baemail.create(baemail, numount)
 }

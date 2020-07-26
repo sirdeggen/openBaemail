@@ -22,6 +22,8 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  **********************************************************************************************************************/
+import fetch from 'node-fetch'
+import bsv from 'bsv'
 
 const Baemail = {}
 
@@ -175,3 +177,5 @@ Baemail.fromHtml = async (html, amount) => {
     const baemail = {body:{time:Date.now(),blocks: html, version: '3.0.0'}}
     return Baemail.create(baemail, numount)
 }
+
+export default Baemail

@@ -3,7 +3,7 @@
   "version": "0.2.4",
   "type": "module",
   "description": "Baemail Protocol, send from anywhere. Requires merchant registration for just now.",
-  "main": "index.js",
+  "main": "index.cjs",
   "scripts": {
     "test": "echo \"Error: no test specified\""
   },
@@ -15,7 +15,7 @@
     "Baemail"
   ],
   "author": "deggen",
-  "license": "SEE LICENSE IN <index.js>",
+  "license": "SEE LICENSE IN <index.cjs>",
   "bugs": {
     "url": "https://github.com/sirdeggen/openBaemail/issues"
   },

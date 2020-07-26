@@ -1,6 +1,7 @@
 {
   "name": "open-baemail",
   "version": "0.2.3",
+  "type": "module",
   "description": "Baemail Protocol, send from anywhere. Requires merchant registration for just now.",
   "main": "index.js",
   "scripts": {
@@ -20,7 +21,7 @@
   },
   "homepage": "https://github.com/sirdeggen/openBaemail#readme",
   "dependencies": {
-    "bsv": "^1.3.0",
+    "bsv": "1.5.3",
     "node-fetch": "^2.6.0"
   }
 }

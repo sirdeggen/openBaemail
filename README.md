@@ -6,6 +6,17 @@ Please register here --> [Registrations & Demo](https://baemail.me/open/baemailE
 # Baemail
 Check out regular Baemail here --> [baemail.me](https://baemail.me)
 
+#PowPing style
+Invisible creation, with swipe to send.
+``` javascript
+import Baemail from 'open-baemail'
+
+const message = await Baemail.send(imb, toPaymail, name, paymail, pki, subject, body, amount)
+
+// dev can then render as they see fit from user to send:
+moneyButton.render(div, message)
+```
+
 # Latest Feature ^0.3.0
 Send from any paymail based app.
 

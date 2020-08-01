@@ -6,6 +6,33 @@ Please register here --> [Registrations & Demo](https://baemail.me/open/baemailE
 # Baemail
 Check out regular Baemail here --> [baemail.me](https://baemail.me)
 
+# Latest Feature ^0.3.0
+Send from any paymail based app.
+
+``` javascript
+import Baemail from 'open-baemail'
+// Assuming in your existing app you use the following
+// An authenticated Invisible MoneyButton instance
+// The primary paymail of that MB account
+// The user's name
+// The user's paymail pki
+const { imb, paymail, name, pki } = userContext
+
+const toPaymail = 'example@moneybutton.com' // Send something to this paymail
+const subject = 'Something'
+const body = '<div><p>Hello Baemail</p></div>'
+const amount = 0.01 // minimum in USD, be careful with this as your user will pay this.
+
+Baemail.send(imb, toPaymail, name, paymail, pki, subject, body, amount)
+    .then(mb => {
+    console.log(mb.payment.txid)
+})
+
+// That's it, console confirms the baemail is sent, and the 
+
+```
+
+
 # Example Integration
 ``` html
 <!DOCTYPE html>

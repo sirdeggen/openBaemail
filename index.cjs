@@ -190,7 +190,7 @@ Baemail.send = async (imb, to, fromName, fromPaymail, fromPki, subject, html, am
             to: to,
             cc: [],
             subject: subject,
-            salesPitch: 'Receipt Notification',
+            salesPitch: '',
             from: {
                 name: fromName,
                 primaryPaymail: fromPaymail,
@@ -270,6 +270,107 @@ Baemail.send = async (imb, to, fromName, fromPaymail, fromPki, subject, html, am
         })
         console.log('Success: ', response)
         return response
+    } catch (er) {
+        console.log(er)
+        return false
+    }
+}
+
+Baemail.createMessage = async (imb, to, fromName, fromPaymail, fromPki, subject, html, amount) => {
+    try {
+        const numount = Number(amount)
+        const strimount = String(amount)
+        const baemail = {body: {time: Date.now(), blocks: html, version: '3.0.0'}}
+        const dataToEncrypt = JSON.stringify(baemail)
+        const baemailData = JSON.stringify({
+            summary: 'Baemail',
+            amountUsd: numount,
+            to: to,
+            cc: [],
+            subject: subject,
+            salesPitch: '',
+            from: {
+                name: fromName,
+                primaryPaymail: fromPaymail,
+                pki: fromPki
+            }
+        })
+
+        const biscuit = bsv.crypto.Hash.sha256(bsv.deps.Buffer.from('1BAESxZMweg2mG4FG2DEZmB1Ury2ruAr9K' + baemailData)).toString('hex')
+        let cryptoOperations = [
+            {
+                name: 'mySignature',
+                method: 'sign',
+                data: biscuit,
+                dataEncoding: 'utf8',
+                key: 'identity',
+                algorithm: 'bitcoin-signed-message'
+            }
+        ]
+
+        cryptoOperations.push({
+            name: 'baemailData',
+            method: 'encrypt',
+            paymail: 'baemail@moneybutton.com',
+            data: baemailData,
+            dataEncoding: 'utf8',
+            key: 'identity',
+            algorithm: 'electrum-ecies'
+        })
+
+        cryptoOperations.push({
+            name: 'privateBaemail',
+            method: 'encrypt',
+            paymail: fromPaymail,
+            data: dataToEncrypt,
+            dataEncoding: 'utf8',
+            key: 'identity',
+            algorithm: 'electrum-ecies'
+        })
+
+
+        cryptoOperations.push({
+            name: 'privateSent',
+            method: 'encrypt',
+            paymail: to,
+            data: dataToEncrypt,
+            dataEncoding: 'utf8',
+            key: 'identity',
+            algorithm: 'electrum-ecies'
+        })
+
+        console.log('Swiping: ', baemailData, cryptoOperations)
+        const response = await imb.swipe({
+            cryptoOperations: cryptoOperations
+        })
+        console.log('Success: ', response)
+
+        let OP_RETURN = ['1BAESxZMweg2mG4FG2DEZmB1Ury2ruAr9K']
+        OP_RETURN.push(response.cryptoOperations.find(x => x.name === 'baemailData').value)
+        OP_RETURN.push(response.cryptoOperations.find(x => x.name === 'privateBaemail').value)
+        OP_RETURN.push(response.cryptoOperations.find(x => x.name === 'privateSent').value)
+        OP_RETURN.push('|', '15igChEkUWgx4dsEcSuPitcLNZmNDfUvgA', biscuit, response.cryptoOperations.find(x => x.name ==='mySignature').value, fromPki, fromPaymail)
+
+        let outputs = []
+        outputs.push({
+            script: bsv.Script.buildSafeDataOut(OP_RETURN).toASM(),
+            amount: '0',
+            currency: 'USD'
+        })
+        outputs.push({
+            to: to,
+            amount: strimount,
+            currency: 'USD'
+        })
+        outputs.push({
+            to: '1BaemaiLK15EnJyFEhwLbrYJmRjqYoBMTe',
+            amount: '0.01',
+            currency: 'USD'
+        })
+        return {
+            outputs: outputs,
+            buttonData: baemailData
+        }
     } catch (er) {
         console.log(er)
         return false

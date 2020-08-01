@@ -11,7 +11,7 @@ Invisible creation, with swipe to send.
 ``` javascript
 import Baemail from 'open-baemail'
 
-const message = await Baemail.send(imb, toPaymail, name, paymail, pki, subject, body, amount)
+const message = await Baemail.createMessage(imb, toPaymail, name, paymail, pki, subject, body, amount)
 
 // dev can then render as they see fit from user to send:
 moneyButton.render(div, message)
